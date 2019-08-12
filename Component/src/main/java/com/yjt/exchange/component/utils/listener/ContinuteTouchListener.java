@@ -1,0 +1,1 @@
+package com.hynet.heebit.components.utils.listener;public interface ContinuteTouchListener {    void continuteTouch(int viewId);}

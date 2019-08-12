@@ -1,0 +1,1 @@
+package com.hynet.heebit.components.widget.chart.constant;/** * 是显示全圆还是半圆 * */public enum CircleType {    FULL,HALF}

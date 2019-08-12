@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView
+        android:id="@+id/ivNavigationView"
+        android:layout_width="@dimen/dp_24"
+        android:layout_height="@dimen/dp_24"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dp_8"
+        android:contentDescription="@null"/>
+
+    <ImageView
+        android:id="@+id/ivNavigationViewSelected"
+        android:layout_width="@dimen/dp_24"
+        android:layout_height="@dimen/dp_24"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dp_8"
+        android:contentDescription="@null"/>
+
+    <TextView
+        android:id="@+id/tvNavigationViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="@dimen/dp_8"
+        android:contentDescription="@null"
+        android:maxLines="1"
+        android:scaleX="1"
+        android:scaleY="1"
+        android:textSize="@dimen/sp_12"/>
+
+</merge>

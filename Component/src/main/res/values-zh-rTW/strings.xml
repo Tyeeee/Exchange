@@ -1,0 +1,9 @@
+<resources>
+    <string name="permission_prompt_permission">請檢查是否已將應用所需權限全部接受</string>
+    <string name="permission_watch">查看</string>
+    <string name="http_error_prompt1">請檢查網絡是否可用</string>
+    <string name="action_sheet_cancel">取消</string>
+    <string name="zh_cn">中文(簡體)</string>
+    <string name="zh_tw">中文(繁體)</string>
+    <string name="en">English</string>
+</resources>

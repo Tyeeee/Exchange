@@ -1,0 +1,148 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+def keyStoreProperties = new Properties()
+def keyStorePropertiesFile = rootProject.file('keystore.properties')
+if (keyStorePropertiesFile.exists()) {
+    keyStoreProperties.load(new FileInputStream(keyStorePropertiesFile))
+}
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        multiDexEnabled true
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+//        javaCompileOptions {
+//            kapt {
+//                arguments {
+//                    arg("objectbox.debug", 'false')
+//                }
+//                arguments {
+//                    arg("objectbox.modelPath", 'app/src/main/assets/object_info.json')
+//                }
+//            }
+//        }
+    }
+    signingConfigs {
+        debug {
+
+        }
+        release {
+            storeFile file(keyStoreProperties['STORE_FILE'])
+            storePassword keyStoreProperties['STORE_PASSWORD']
+            keyAlias keyStoreProperties['KEY_ALIAS']
+            keyPassword keyStoreProperties['KEY_PASSWORD']
+        }
+    }
+    buildTypes {
+        debug {
+            ndk {
+                abiFilters 'armeabi', 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a', 'mips', 'mips64'
+            }
+            minifyEnabled false
+            zipAlignEnabled false
+            shrinkResources false
+            signingConfig signingConfigs.debug
+            //            multiDexKeepProguard file('proguard-rules.pro')
+//            multiDexKeepFile file('multiDexKeep.txt')
+        }
+        release {
+            ndk {
+                abiFilters 'armeabi', 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a', 'mips', 'mips64'
+            }
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources false
+            signingConfig signingConfigs.release
+//            multiDexKeepProguard file('proguard-rules.pro')
+//            multiDexKeepFile file('multiDexKeep.txt')
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            applicationVariants.all { variant ->
+                variant.outputs.all {
+                    if (outputFileName != null && outputFileName.endsWith('.apk')) {
+                        outputFileName = "${variant.flavorName}_v${variant.versionName}_${new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))}" + '.apk'
+                    }
+                }
+            }
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+            java.srcDirs = ['src/main/java']
+            resources.srcDirs = ['src/main/resources']
+            aidl.srcDirs = ['src/main/aidl']
+            renderscript.srcDirs = ['src/maom']
+            res.srcDirs = ['src/main/res']
+            assets.srcDirs = ['src/main/assets']
+        }
+//        instrumentTest.setRoot('androidTest')
+        debug.setRoot('build-types/debug')
+        release.setRoot('build-types/release')
+    }
+    flavorDimensions "channel_name", "channel_server"
+    productFlavors {
+        _240 {
+            dimension "channel_server"
+            manifestPlaceholders = [CHANNEL_SERVER  : "240",
+                                    qqappid         : "1106130397",
+                                    GETUI_APP_ID    : "hvFmM2W2u0A51ilgkjVbq5",
+                                    GETUI_APP_KEY   : "Yeim56j9aVAeHA6y0ZM3B",
+                                    GETUI_APP_SECRET: "5Z6rPZ5bgw93buce0GFIW4"
+            ]
+        }
+        _104 {
+            dimension "channel_server"
+            manifestPlaceholders = [CHANNEL_SERVER  : "104",
+                                    qqappid         : "1106130397",
+                                    GETUI_APP_ID    : "gWQhY9uowP9aqEbAFBXup8",
+                                    GETUI_APP_KEY   : "xMq0L13Tsb5PrslCa0jSl3",
+                                    GETUI_APP_SECRET: "VtQqSIu9Eg9jcGCwOwecY4"
+            ]
+        }
+        _105 {
+            dimension "channel_server"
+            manifestPlaceholders = [CHANNEL_SERVER  : "105",
+                                    qqappid         : "1106130397",
+                                    GETUI_APP_ID    : "gWQhY9uowP9aqEbAFBXup8",
+                                    GETUI_APP_KEY   : "xMq0L13Tsb5PrslCa0jSl3",
+                                    GETUI_APP_SECRET: "VtQqSIu9Eg9jcGCwOwecY4"
+            ]
+        }
+        yjt {
+            dimension "channel_name"
+            applicationId "com.yjt.exchange"
+            versionCode 1
+            versionName "0.0.1"
+            manifestPlaceholders = [CHANNEL_NAME: "yjt_app",
+                                    app_name    : "Exchange",
+                                    app_icon    : "@mipmap/icon_logo"]
+        }
+    }
+    dexOptions {
+        javaMaxHeapSize '4g'
+    }
+    lintOptions {
+//        textReport true
+//        textOutput 'stdout'
+//        abortOnError true
+        abortOnError false
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testApi deps.junit
+    androidTestApi deps.runner
+    androidTestApi deps.espresso_core
+    api project(':Base')
+    implementation deps.constraint_layout
+    implementation deps.objectbox
+    kapt deps.objectbox_processor
+}
+

@@ -1,0 +1,1 @@
+package com.hynet.heebit.components.widget.chart.constant;/** * 横向显示位置,靠左，中间，还是靠右(如图标题......) * */public enum HorizontalAlign {    LEFT, CENTER ,RIGHT}

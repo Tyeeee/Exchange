@@ -1,0 +1,3 @@
+<resources>
+    <bool name="tablet_landscape">true</bool>
+</resources>

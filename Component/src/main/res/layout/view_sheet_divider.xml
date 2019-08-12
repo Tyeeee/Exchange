@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><View xmlns:android="http://schemas.android.com/apk/res/android"      android:id="@+id/titleTextView"      android:layout_width="wrap_content"      android:layout_height="@dimen/dp_1"      android:layout_marginBottom="@dimen/dp_8"      android:layout_marginTop="@dimen/dp_8"      android:background="@color/color_3f717171"/>

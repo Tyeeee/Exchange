@@ -1,0 +1,1 @@
+package com.hynet.heebit.components.widget.chart.constant;/** * 图的所属类型 * */public enum ChartType {    NONE, BAR, BAR3D, STACKBAR, PIE, PIE3D, DOUNT, LINE, SPLINE, AREA, ROSE, RADAR, DIAL, RANGEBAR, ARCLINE, CIRCLE, SCATTER, BUBBLE, GAUGE, FUNNEL}

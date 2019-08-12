@@ -1,0 +1,1 @@
+package com.hynet.heebit.components.widget.chart.constant;/** * 线的类型，默认的直线还是贝塞尔曲线(Bézier curve) * */public enum CrurveLineStyle {    BEELINE,BEZIERCURVE}
